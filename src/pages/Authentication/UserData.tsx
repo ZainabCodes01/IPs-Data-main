@@ -387,7 +387,7 @@ export default function UserData({ showActions = false }: { showActions?: boolea
 
 
           <div className="flex items-center gap-4 justify-center">
-            <Button
+            {/* <Button
               size="md"
               onClick={() => {
                 localStorage.removeItem("isLoggedIn");
@@ -398,7 +398,7 @@ export default function UserData({ showActions = false }: { showActions?: boolea
               className="bg-red-500 text-white  shadow-md hover:bg-red-600 transition"
             >
               Logout
-            </Button>
+            </Button> */}
             <select
               className="p-2 bg-sky-600 text-white font-semibold rounded-lg shadow-md border border-sky-600"
               value={pageSize}

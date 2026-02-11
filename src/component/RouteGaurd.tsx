@@ -6,7 +6,7 @@ interface RouteProps {
   isPublic?: boolean;
 }
 
-export default function RouteGuard({ children, allowedRole, isPublic }: RouteProps) {
+export default function RouteGuard({ children, isPublic }: RouteProps) {
   const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
   const role = localStorage.getItem("role");
 
@@ -18,13 +18,13 @@ export default function RouteGuard({ children, allowedRole, isPublic }: RoutePro
   }
 
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (!isLoggedIn) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
-  if (allowedRole && role !== allowedRole) {
-    return <Navigate to="/login" replace />;
-  }
+  // if (allowedRole && role !== allowedRole) {
+  //   return <Navigate to="/login" replace />;
+  // }
 
   return children;
 }
