@@ -3,11 +3,13 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { AddUserSchema, type AddUserForm } from "./Validation";
+import { AddUserSchema, type AddUserForm } from "./pages/CRUD/Validation";
+
 import { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, addUser, updateUser, type UserData } from "../../features/UserSlice";
+import { getUsers, addUser, updateUser, type UserData } from "./features/UserSlice";
+
 
 export default function AddUsers() {
   const [message, setMessage] = useState("");
@@ -34,18 +36,19 @@ export default function AddUsers() {
         const existingUser = users.find((user: UserData) => user.id === userId);
 
         if (existingUser) {
-          setValue("firstName", existingUser.firstName);
-          setValue("email", existingUser.email);
-          setValue("gender", existingUser.gender);
-          setValue("birthDate", existingUser.birthDate);
+          setValue("firstName", existingUser.firstName ?? "");
+          setValue("email", existingUser.email ?? "");
+          setValue("gender", existingUser.gender ?? "");
+          setValue("birthDate", existingUser.birthDate ?? "");
+
         } else {
-            const response = await axios.get(`https://dummyjson.com/users/${userId}`);
-            const user = response.data;
-            setValue("firstName", user.firstName);
-            setValue("email", user.email);await
+          const response = await axios.get(`https://dummyjson.com/users/${userId}`);
+          const user = response.data;
+          setValue("firstName", user.firstName);
+          setValue("email", user.email); await
             setValue("gender", user.gender);
-            setValue("birthDate", user.birthDate);
-            setMessage("User not found");
+          setValue("birthDate", user.birthDate);
+          setMessage("User not found");
         }
       } else {
         return ("User not existed");
